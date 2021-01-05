@@ -1,27 +1,47 @@
-import { Card } from 'antd';
+import { Card, Skeleton } from 'antd';
 import Meta from 'antd/lib/card/Meta';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const ResultCard = (props) => {
 
-    const { details } = props;
+    const { details, loading } = props;
+    const [ cardDetails, setDetails ] = useState(details);
+
+    // useEffect(() => {
+    //     if(!details)
+    //     {
+    //         setDetails({ 'videoId': 'hvjhjh', 'title': 'null', 
+    //         'videoThumbnails': 
+    //         [{'url': ''}, {'url': 'https://google.com'}, {'url': 'https://google.com'}, 
+    //         {'url': ''}], 'description': 'null' })
+    //     }
+    //     else
+    //         setDetails(details);
+    // })
 
     return(
         <div style={{ margin: '20px' }} >
+            {/* <Skeleton loading={loading} active > */}
              <Card
-                onClick={() => window.open('https://youtu.be/'+details['videoId'], '_blank') }
+                // loading={loading}
+                onClick={() => window.open('https://youtu.be/'+cardDetails['videoId'], '_blank') }
                 hoverable
-                style={{ width: 450, height: 400 }}
+                style={{ width: 450/1.8, height: 400/2 }}
                 cover={
-                    <img alt="thumbnail" src={details['videoThumbnails'][3]['url']} 
-                        height={270}
-                        width={500}
+                    <img 
+                        alt="" 
+                        src={cardDetails['videoThumbnails'][3]['url']} 
+                        height={270/2}
+                        width={500/2}
                         
                     />
                 }
             >
-                <Meta title={details['title']} description={details['description']} />
+                <Meta title={cardDetails['title']} 
+                    // description={cardDetails['description']} 
+                />
             </Card>
+            {/* </Skeleton> */}
         </div>
     )
 }
