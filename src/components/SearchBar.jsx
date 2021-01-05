@@ -7,7 +7,7 @@ function SearchBar(props) {
     const [ term, setTerm ] = useState('');
 
     return(
-        <div style={{ marginLeft:"280px", marginRight: "280px" }} >
+        <div>
             <Search 
                 enterButton
                 onSearch={ () => onSearch(term) }

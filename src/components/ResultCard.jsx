@@ -4,44 +4,28 @@ import React, { useEffect, useState } from 'react';
 
 const ResultCard = (props) => {
 
-    const { details, loading } = props;
-    const [ cardDetails, setDetails ] = useState(details);
-
-    // useEffect(() => {
-    //     if(!details)
-    //     {
-    //         setDetails({ 'videoId': 'hvjhjh', 'title': 'null', 
-    //         'videoThumbnails': 
-    //         [{'url': ''}, {'url': 'https://google.com'}, {'url': 'https://google.com'}, 
-    //         {'url': ''}], 'description': 'null' })
-    //     }
-    //     else
-    //         setDetails(details);
-    // })
+    const { details } = props;
 
     return(
         <div style={{ margin: '20px' }} >
-            {/* <Skeleton loading={loading} active > */}
              <Card
-                // loading={loading}
-                onClick={() => window.open('https://youtu.be/'+cardDetails['videoId'], '_blank') }
+                onClick={() => window.open('https://youtu.be/'+details['videoId'], '_blank') }
                 hoverable
                 style={{ width: 450/1.8, height: 400/2 }}
                 cover={
                     <img 
                         alt="" 
-                        src={cardDetails['videoThumbnails'][3]['url']} 
+                        src={details['videoThumbnails'][3]['url']} 
                         height={270/2}
                         width={500/2}
                         
                     />
                 }
             >
-                <Meta title={cardDetails['title']} 
-                    // description={cardDetails['description']} 
+                <Meta title={details['title']} 
+                    // description={details['description']} 
                 />
             </Card>
-            {/* </Skeleton> */}
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import { Row } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import LoadingCard from '../components/LoadingCard';
 import ResultCard from '../components/ResultCard';
 
 function Trending(props) {
@@ -11,6 +12,7 @@ function Trending(props) {
     const getTrending = () => {
         axios.get('https://invidious.snopyta.org/api/v1/trending')
         .then((res) => {
+            console.log(res.data)
             setTrending(res.data);
         })
     }
@@ -29,11 +31,13 @@ function Trending(props) {
                     return(
                         <ResultCard details={video} />
                     )
-                }) : [...Array(10)].map( i => {
-                    return(
-                        // <ResultCard loading={true} details={null} />
-                        <div />
-                    )
+                }) : [...Array(12)].map( i => {
+                    if(trending)
+                        return(
+                            <LoadingCard count={12} />
+                        )
+                    else
+                        return(<div/>)
                 } )
             }
             </Row>

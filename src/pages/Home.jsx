@@ -1,6 +1,7 @@
-import { Row } from 'antd';
+import { Button, Row } from 'antd';
 import axios from 'axios';
 import React, { useState } from 'react';
+import LoadingCard from '../components/LoadingCard';
 import ResultCard from '../components/ResultCard';
 import SearchBar from '../components/SearchBar';
 import Trending from './Trending';
@@ -11,29 +12,52 @@ export default function Home() {
     const [ trending, setTrending ] = useState(true);
 
     const searchVideos = (searchTerm) => {
-        searchTerm = encodeURI(searchTerm);
-        axios.get('https://invidious.snopyta.org/api/v1/search?q='+searchTerm)
-        .then((res) => {
-            console.log(res.data);
+        if(searchTerm != '') {
             setTrending(false);
-            setResults(res.data);
-            if (res.data.length === 0)
-                setTrending(true)
-        });
+            searchTerm = encodeURI(searchTerm);
+            axios.get('https://invidious.snopyta.org/api/v1/search?q='+searchTerm)
+            .then((res) => {
+                console.log(res.data);
+                setResults(res.data);
+                if (res.data.length === 0)
+                    setTrending(true)
+                else
+                    setTrending(false)
+            });
+        }
     }
 
     return(
         <div style={{ justifyContent: 'center' }} >
-            <SearchBar 
-                onSearch={ (value) => searchVideos(value) }
-            />
+
+            <Row justify='space-around' >
+                <div/>
+                <div/>
+                <Button 
+                    onClick={()=> {
+                        if(!trending) {
+                            setTrending(true); setResults([]);
+                    }}}
+                >Trending</Button>
+                <SearchBar 
+                    onSearch={ (value) => searchVideos(value) }
+                />
+                <div/>
+                <div/>
+            </Row>
 
             <Row justify='center' >
-                { results.map( result => {
-                    return(
-                        <ResultCard details={ result } />
-                    )
-                })}
+                { results.length !== 0 ? results.map( result => {
+                        return(
+                            <ResultCard details={ result } />
+                        )
+                    }) : [...Array(12)].map(i => {
+                        if(!trending)
+                            return(<LoadingCard />);
+                        else
+                            return(<div />);
+                    })
+            }
             </Row>
 
             <Trending trending={trending} />
