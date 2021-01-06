@@ -1,15 +1,27 @@
-import { Card, Skeleton } from 'antd';
+import { Card } from 'antd';
 import Meta from 'antd/lib/card/Meta';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import VideoPlayer from './VideoPlayer';
 
 const ResultCard = (props) => {
 
     const { details } = props;
 
+    const [ playerOpen, setPlayer ] = useState(false);
+
+    const openPlayer = () => {
+        console.log("in card open");
+        setPlayer(true);
+    }
+
+    const closePlayer = () => {
+        setPlayer(false);
+    }
+
     return(
         <div style={{ margin: '20px' }} >
              <Card
-                onClick={() => window.open('https://youtu.be/'+details['videoId'], '_blank') }
+                onClick={() => {openPlayer()}}
                 hoverable
                 style={{ width: 450/1.8, height: 400/2 }}
                 cover={
@@ -26,6 +38,13 @@ const ResultCard = (props) => {
                     // description={details['description']} 
                 />
             </Card>
+
+            { playerOpen ? 
+                ( <VideoPlayer videoLink={"https://youtube.com/watch?v="+details['videoId']}
+                    onClose={() => closePlayer() }   />) 
+                : (<div />)  
+            }
+
         </div>
     )
 }

@@ -10,7 +10,7 @@ function Trending(props) {
     const [ trendingVids, setTrending ] = useState([]);
 
     const getTrending = () => {
-        axios.get('https://invidious.snopyta.org/api/v1/trending')
+        axios.get('https://invidious.kavin.rocks/api/v1/trending/')  
         .then((res) => {
             console.log(res.data)
             setTrending(res.data);

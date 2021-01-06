@@ -12,10 +12,11 @@ export default function Home() {
     const [ trending, setTrending ] = useState(true);
 
     const searchVideos = (searchTerm) => {
-        if(searchTerm != '') {
+        if(searchTerm !== '') {
             setTrending(false);
+            setResults([])
             searchTerm = encodeURI(searchTerm);
-            axios.get('https://invidious.snopyta.org/api/v1/search?q='+searchTerm)
+            axios.get('https://invidious.kavin.rocks/api/v1/search?q='+searchTerm)
             .then((res) => {
                 console.log(res.data);
                 setResults(res.data);
@@ -35,9 +36,9 @@ export default function Home() {
                 <div/>
                 <Button 
                     onClick={()=> {
-                        if(!trending) {
+                        // if(!trending) {
                             setTrending(true); setResults([]);
-                    }}}
+                    }}
                 >Trending</Button>
                 <SearchBar 
                     onSearch={ (value) => searchVideos(value) }
