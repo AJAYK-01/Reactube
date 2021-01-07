@@ -16,8 +16,14 @@ export default function Home() {
             setTrending(false);
             setResults([])
             searchTerm = encodeURI(searchTerm);
-            axios.get('https://invidious.kavin.rocks/api/v1/search?q='+searchTerm)
-            .then((res) => {
+            let url = '';
+            if(searchTerm === 'trendingmusic')
+                url = 'https://invidious.kavin.rocks/api/v1/trending?type=music';
+            else
+                url = 'https://invidious.kavin.rocks/api/v1/search?q='+searchTerm;
+
+            console.log(url);
+            axios.get(url).then((res) => {
                 console.log(res.data);
                 setResults(res.data);
                 if (res.data.length === 0)
@@ -40,6 +46,12 @@ export default function Home() {
                             setTrending(true); setResults([]);
                     }}
                 >Trending</Button>
+                <Button 
+                    onClick={()=> {
+                        // if(!trending) {
+                            searchVideos('trendingmusic');
+                    }}
+                >Music</Button>
                 <SearchBar 
                     onSearch={ (value) => searchVideos(value) }
                 />
