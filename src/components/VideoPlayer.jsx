@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from 'antd';
-import ReactPlayer from 'react-player/lazy';
+import ReactPlayer from 'react-player';
 
 const VideoPlayer = (props) => {
 

@@ -1,10 +1,12 @@
-import { Button, Row } from 'antd';
+import { Button, Col, Row, Typography } from 'antd';
+import { Header } from 'antd/lib/layout/layout';
 import axios from 'axios';
 import React, { useState } from 'react';
 import LoadingCard from '../components/LoadingCard';
 import ResultCard from '../components/ResultCard';
 import SearchBar from '../components/SearchBar';
 import Trending from './Trending';
+import { FireOutlined, ThunderboltFilled, ThunderboltOutlined } from '@ant-design/icons';
 
 export default function Home() {
 
@@ -34,30 +36,70 @@ export default function Home() {
         }
     }
 
+    const TrendingButton = () => {
+        return(
+            <Button type='primary' shape='round' icon={<FireOutlined />}
+                onClick={()=> {
+                        setTrending(true); setResults([]);
+                }}
+            >
+                <span style={{whiteSpace: 'nowrap'}}>Trending</span>
+            </Button>
+        )
+    }
+
+    const MusicButton = () => {
+        return(
+            <Button type='primary' shape='round' icon={<ThunderboltOutlined />}
+                onClick={()=> {
+                        searchVideos('trendingmusic');
+                }}
+            >Music</Button>
+        )
+    }
+
     return(
         <div style={{ justifyContent: 'center' }} >
+            <div style={{marginBottom: '10px'}} > 
+                <Row justify='space-between' align='middle' style={{paddingTop: '15px'}} >
+                    
+                    <Col xs={0} md={3} />
 
-            <Row justify='space-around' style={{marginBottom: '10px', paddingTop: '5px'}} >
-                <div/>
-                <div/>
-                <Button 
-                    onClick={()=> {
-                        // if(!trending) {
-                            setTrending(true); setResults([]);
-                    }}
-                >Trending</Button>
-                <Button 
-                    onClick={()=> {
-                        // if(!trending) {
-                            searchVideos('trendingmusic');
-                    }}
-                >Music</Button>
-                <SearchBar 
-                    onSearch={ (value) => searchVideos(value) }
-                />
-                <div/>
-                <div/>
-            </Row>
+                    <Col xs={24} sm={24} md={3} >
+                        <Typography style={{color: 'white', fontSize: '30px'}} >ReacTube</Typography>
+                    </Col>
+
+                    <Col xs={0} sm={0} md={3}>
+                       <TrendingButton />
+                    </Col>
+                    
+                    <Col xs={0} sm={0} md={3}>
+                        <MusicButton />
+                    </Col>
+
+                    <Col xs={2} sm={2} md={3} />
+
+                    <Col xs={20} sm={20} md={6} >
+                        <SearchBar onSearch={ (value) => searchVideos(value) }
+                    />
+                    </Col>
+
+                    <Col xs={2} sm={2} md={3} />
+
+                    <Col xs={24} sm={24} md={0} style={{paddingTop: '12px'}} ></Col>
+
+                    <Col xs={12} sm={12} md={0}>
+                       <TrendingButton />
+                    </Col>
+                    
+                    <Col xs={12} sm={12} md={0}>
+                        <MusicButton />
+                    </Col>
+
+                    <Col xs={0} sm={0} md={3} />
+  
+                </Row>
+            </div>
 
             <Row justify='center' >
                 { results.length !== 0 ? results.map( result => {
