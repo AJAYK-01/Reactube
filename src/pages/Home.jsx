@@ -31,7 +31,7 @@ export default function Home() {
     return(
         <div style={{ justifyContent: 'center' }} >
 
-            <Row justify='space-around' >
+            <Row justify='space-around' style={{marginBottom: '10px', paddingTop: '5px'}} >
                 <div/>
                 <div/>
                 <Button 

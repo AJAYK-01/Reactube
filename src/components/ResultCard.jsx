@@ -1,5 +1,6 @@
-import { Card } from 'antd';
+import { Card, Typography } from 'antd';
 import Meta from 'antd/lib/card/Meta';
+import Paragraph from 'antd/lib/skeleton/Paragraph';
 import React, { useState } from 'react';
 import VideoPlayer from './VideoPlayer';
 
@@ -18,26 +19,35 @@ const ResultCard = (props) => {
         setPlayer(false);
     }
 
+    const bgColor = '#1D3557';
+    const textColor = '#CDEAE5';
+
     return(
         <div style={{ margin: '20px' }} >
+          <span title={details['title']}>
              <Card
                 onClick={() => {openPlayer()}}
                 hoverable
-                style={{ width: 450/1.8, height: 400/2 }}
+                style={{ borderColor: bgColor, backgroundColor: bgColor,
+                    width: 450/1.8, height: 400/2}}
                 cover={
                     <img 
                         alt="" 
                         src={details['videoThumbnails'][3]['url']} 
-                        height={270/2}
+                        height={280/2}
                         width={500/2}
-                        
                     />
                 }
             >
-                <Meta title={details['title']} 
+                <Meta title={
+                  <div style={{color: textColor, textOverflow: 'ellipsis', overflow: 'hidden'}} >
+                        {details['title']}
+                  </div>
+                }
                     // description={details['description']} 
                 />
             </Card>
+          </span>
 
             { playerOpen ? 
                 ( <VideoPlayer videoLink={"https://youtube.com/watch?v="+details['videoId']}
