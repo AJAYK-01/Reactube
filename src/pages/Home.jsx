@@ -1,12 +1,11 @@
 import { Button, Col, Row, Typography } from 'antd';
-import { Header } from 'antd/lib/layout/layout';
 import axios from 'axios';
 import React, { useState } from 'react';
 import LoadingCard from '../components/LoadingCard';
 import ResultCard from '../components/ResultCard';
 import SearchBar from '../components/SearchBar';
 import Trending from './Trending';
-import { FireOutlined, ThunderboltFilled, ThunderboltOutlined } from '@ant-design/icons';
+import { FireOutlined, ThunderboltOutlined } from '@ant-design/icons';
 
 export default function Home() {
 
@@ -63,10 +62,18 @@ export default function Home() {
             <div style={{marginBottom: '10px'}} > 
                 <Row justify='space-between' align='middle' style={{paddingTop: '15px'}} >
                     
-                    <Col xs={0} md={3} />
+                    <Col xs={0} md={2} />
 
-                    <Col xs={24} sm={24} md={3} >
+                    <Col xs={24} sm={24} md={4} >
+                      <Row justify='center' >
+                        
+                        <img src={window.location.origin + '/logo192.png'}
+                            style={{height: '40px', objectFit: 'contain', 
+                            paddingRight: '8px', paddingTop: '2px'}} 
+                        />  
                         <Typography style={{color: 'white', fontSize: '30px'}} >ReacTube</Typography>
+                      
+                      </Row>
                     </Col>
 
                     <Col xs={0} sm={0} md={3}>

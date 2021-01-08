@@ -1,6 +1,5 @@
-import { Card, Typography } from 'antd';
+import { Card } from 'antd';
 import Meta from 'antd/lib/card/Meta';
-import Paragraph from 'antd/lib/skeleton/Paragraph';
 import React, { useState } from 'react';
 import VideoPlayer from './VideoPlayer';
 
@@ -28,7 +27,7 @@ const ResultCard = (props) => {
              <Card
                 onClick={() => {openPlayer()}}
                 hoverable
-                style={{ borderColor: bgColor, backgroundColor: bgColor,
+                style={{ borderColor: bgColor, backgroundColor: bgColor, borderRadius: '6px',
                     width: 450/1.8, height: 400/2}}
                 cover={
                     <img 
@@ -36,6 +35,7 @@ const ResultCard = (props) => {
                         src={details['videoThumbnails'][3]['url']} 
                         height={280/2}
                         width={500/2}
+                        style={{objectFit: 'cover'}}
                     />
                 }
             >
