@@ -14,7 +14,6 @@ function SearchBar(props) {
                 onSearch={ () => onSearch(term) }
                 value={ term }
                 onChange={ (e) => setTerm(e.target.value) }
-                style={{verticalAlign: 'center'}}
             />   
         </div>
     );

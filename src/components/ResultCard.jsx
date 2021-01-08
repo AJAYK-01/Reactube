@@ -51,7 +51,7 @@ const ResultCard = (props) => {
 
             { playerOpen ? 
                 ( <VideoPlayer videoLink={"https://youtube.com/watch?v="+details['videoId']}
-                    onClose={() => closePlayer() }   />) 
+                   title={details['title']} onClose={() => closePlayer() }   />) 
                 : (<div />)  
             }
 

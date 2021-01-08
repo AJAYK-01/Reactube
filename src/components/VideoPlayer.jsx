@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Modal } from 'antd';
 import ReactPlayer from 'react-player';
+import DownloadVideo from './DownloadVideo';
 
 const VideoPlayer = (props) => {
 
-    const bgColor = '#1D3557';
+    const bgColor = 'grey';
 
-    const { videoLink, onClose } = props;
+    const { videoLink, title, onClose } = props;
     const [isModalVisible, setIsModalVisible] = useState(true);
+    const [ play, setPlay ] = useState(true);
 
     const handleCancel = () => {
         setIsModalVisible(false);
@@ -20,8 +22,12 @@ const VideoPlayer = (props) => {
                 closeIcon={<div/>} width='640px' destroyOnClose={true}
                 bodyStyle={{display: 'contents', justifyContent:'center'}}>
                 
-                <div style={{display: 'flex', justifyContent: 'center', backgroundColor: bgColor}} >
+                <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column',
+                    backgroundColor: bgColor}} >
                     <ReactPlayer url={videoLink} playing={true} controls={true} pip={true} />
+                    
+                    <DownloadVideo link={videoLink} title={title} stopPlay={handleCancel} />
+                    
                 </div>
             </Modal>
         </div>
