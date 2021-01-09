@@ -11,6 +11,7 @@ export default function Home() {
 
     const [ results, setResults ] = useState([]);
     const [ trending, setTrending ] = useState(true);
+    const invidious = 'https://invidiou.site';
 
     const searchVideos = (searchTerm) => {
         if(searchTerm !== '') {
@@ -19,9 +20,9 @@ export default function Home() {
             searchTerm = encodeURI(searchTerm);
             let url = '';
             if(searchTerm === 'trendingmusic')
-                url = 'https://invidious.kavin.rocks/api/v1/trending?type=music';
+                url = invidious+'/api/v1/trending?type=music';
             else
-                url = 'https://invidious.kavin.rocks/api/v1/search?q='+searchTerm;
+                url = invidious+'/api/v1/search?q='+searchTerm;
 
             console.log(url);
             axios.get(url).then((res) => {
@@ -68,7 +69,7 @@ export default function Home() {
                       <Row justify='center' style={{cursor: 'pointer'}}
                         onClick={()=>{window.location.reload(true)}} >
                         
-                        <img src={window.location.origin + '/logo192.png'}
+                        <img src={window.location.origin + '/logo192.png'} alt={<div/>}
                             style={{height: '40px', objectFit: 'contain', 
                             paddingRight: '8px', paddingTop: '2px'}} 
                         />  
@@ -123,7 +124,7 @@ export default function Home() {
             }
             </Row>
 
-            <Trending trending={trending} />
+            <Trending trending={trending} invidious={invidious} />
 
         </div>
     );

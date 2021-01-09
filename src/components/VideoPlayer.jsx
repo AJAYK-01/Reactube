@@ -9,7 +9,6 @@ const VideoPlayer = (props) => {
 
     const { videoLink, title, onClose } = props;
     const [isModalVisible, setIsModalVisible] = useState(true);
-    const [ play, setPlay ] = useState(true);
 
     const handleCancel = () => {
         setIsModalVisible(false);

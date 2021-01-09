@@ -6,11 +6,11 @@ import ResultCard from '../components/ResultCard';
 
 function Trending(props) {
 
-    const { trending } = props;
+    const { trending, invidious } = props;
     const [ trendingVids, setTrending ] = useState([]);
 
     const getTrending = () => {
-        axios.get('https://invidious.kavin.rocks/api/v1/trending/')  
+        axios.get(invidious+'/api/v1/trending/')  
         .then((res) => {
             console.log(res.data)
             setTrending(res.data);
