@@ -1,10 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const { exec } = require('child_process');
+const contentDisposition = require('content-disposition');
 const fs = require('fs');
 const app = express();
 
 app.use(cors());
+
+const prcs = exec('pip3 install youtube-dl');
 
 app.listen(4000, () => {
     console.log('Server Works !!! At port 4000');
@@ -21,29 +24,32 @@ app.get('/download', (req,res) => {
     filter = 'audioonly'
   }
 
-
-  res.header('Content-Disposition', 'attachment; filename="'+title+ext+'"');
+  res.header('Content-Disposition', contentDisposition(title)+ext+'"');
 
   if(filter === 'audioonly') {
-    const command = 'youtube-dl -o \''+title+'.mp3\' -f bestaudio[ext=m4a]/mp3'+' \''+URL+'\'';
+    const command = 'youtube-dl -o \''+'./cache/'+title+'.mp3\' -f bestaudio[ext=m4a]/mp3'+' \''+URL+'\'';
     console.log(command);
     const process = exec(command);
     
     process.on('exit', (code, signal) => {
-      fs.createReadStream(title+'.mp3').pipe(res);
-      exec('rm \''+title+'.mp3\'');
-        
+      fs.createReadStream('./cache/'+title+'.mp3').pipe(res);
+      exec('rm \''+'./cache/'+title+'.mp3\'');
+    })
+    process.on('error', (code, signal) => {
+      exec('rm -rf ./cache/');
     })
   }
   else {
-    const command = 'youtube-dl -o \''+title+'.mp4\' -f '+quality+'[ext=mp4]+bestaudio[ext=m4a]/mp4'+' \''+URL+'\'';
+    const command = 'youtube-dl -o \''+'./cache/'+title+'.mp4\' -f '+quality+'[ext=mp4]+bestaudio[ext=m4a]/mp4'+' \''+URL+'\'';
     console.log(command);
     const process = exec(command);
     
     process.on('exit', (code, signal) => {
-      fs.createReadStream(title+'.mp4').pipe(res);
-      exec('rm \''+title+'.mp4\'');
-        
+      fs.createReadStream('./cache/'+title+'.mp4').pipe(res);
+      exec('rm \''+'./cache/'+title+'.mp4\'');
+    })
+    process.on('error', (code, signal) => {
+      exec('rm -rf ./cache/');
     })
   }
 });
