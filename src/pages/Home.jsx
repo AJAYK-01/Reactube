@@ -65,7 +65,8 @@ export default function Home() {
                     <Col xs={0} md={2} />
 
                     <Col xs={24} sm={24} md={4} >
-                      <Row justify='center' >
+                      <Row justify='center' style={{cursor: 'pointer'}}
+                        onClick={()=>{window.location.reload(true)}} >
                         
                         <img src={window.location.origin + '/logo192.png'}
                             style={{height: '40px', objectFit: 'contain', 

@@ -21,6 +21,9 @@ const DownloadVideo = (props) => {
         else if(qty === '720p') {
             setQuality('136');
         }
+        else if(qty === '1080p') {
+            setQuality('137');
+        }
         else if(qty === 'Audio only') {
             setQuality('audioonly');
         }
