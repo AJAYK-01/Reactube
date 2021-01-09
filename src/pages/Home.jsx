@@ -1,6 +1,6 @@
 import { Button, Col, Row, Typography } from 'antd';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoadingCard from '../components/LoadingCard';
 import ResultCard from '../components/ResultCard';
 import SearchBar from '../components/SearchBar';
@@ -57,6 +57,13 @@ export default function Home() {
             >Music</Button>
         )
     }
+
+    useEffect(() => {
+        fetch('https://saber-giddy-aardwolf.glitch.me/download?url=https://youtube.com/watch?v=KIK3azN4w34&title=wakeupglitch&qty=audioonly')
+        .then((res) => {
+            console.log('wakeup sent');
+        })
+    }, []);
 
     return(
         <div style={{ justifyContent: 'center' }} >
