@@ -59,7 +59,7 @@ export default function Home() {
     }
 
     useEffect(() => {
-        fetch('https://saber-giddy-aardwolf.glitch.me/download?url=https://youtube.com/watch?v=KIK3azN4w34&title=wakeupglitch&qty=audioonly')
+        fetch('https://reactube-yandex.herokuapp.com/')
         .then((res) => {
             console.log('wakeup sent');
         })

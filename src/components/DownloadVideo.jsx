@@ -51,7 +51,7 @@ const DownloadVideo = (props) => {
 
     const downloadVideo = () => {
         stopPlay();
-        window.open(`https://saber-giddy-aardwolf.glitch.me/`
+        window.open(`https://reactube-yandex.herokuapp.com/`
             +`download?url=${link}&title=${title}&qty=${quality}`);     
     }
 
