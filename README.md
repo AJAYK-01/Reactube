@@ -9,6 +9,7 @@
 - Uses [Invidious-api](https://github.com/iv-org/invidious) for fetching search and trending results from YouTube.
 - Downloads are handled by a Node server.
 - The node server uses [youtube-dl](https://github.com/ytdl-org/youtube-dl) as a child process to fetch and send back the file to user.
+- Logo designed by [@GameGodS3](https://github.com/GameGodS3)
 
 ### Requirements to host backend on heroku
 - Node buildpack
