@@ -6,14 +6,26 @@ import ResultCard from '../components/ResultCard';
 
 function Trending(props) {
 
-    const { trending, invidious } = props;
+    const { trending, invidious, invidious2 } = props;
     const [ trendingVids, setTrending ] = useState([]);
 
     const getTrending = () => {
         axios.get(invidious+'/api/v1/trending/')  
         .then((res) => {
-            console.log(res.data)
             setTrending(res.data);
+        }).catch((err) => {
+            console.log('caught');
+
+            //retrying with alternative invidious instance
+            axios.get(invidious2+'/api/v1/trending/')  
+            .then((res) => {
+                setTrending(res.data);
+            }).catch(() => {
+                alert("Invidious api is down :(");
+                return
+            })
+            return
+
         })
     }
 
@@ -22,7 +34,7 @@ function Trending(props) {
             getTrending();
         if(trending === false )
             setTrending([]);
-    });
+    }, []);
 
     return(
         <div>

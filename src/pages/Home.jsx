@@ -12,6 +12,7 @@ export default function Home() {
     const [ results, setResults ] = useState([]);
     const [ trending, setTrending ] = useState(true);
     const invidious = 'https://invidiou.site';
+    const invidious2 = 'https://invidious.kavin.rocks';
 
     const searchVideos = (searchTerm) => {
         if(searchTerm !== '') {
@@ -20,18 +21,30 @@ export default function Home() {
             searchTerm = encodeURI(searchTerm);
             let url = '';
             if(searchTerm === 'trendingmusic')
-                url = invidious+'/api/v1/trending?type=music';
+                url = '/api/v1/trending?type=music';
             else
-                url = invidious+'/api/v1/search?q='+searchTerm;
+                url = '/api/v1/search?q='+searchTerm;
 
-            console.log(url);
-            axios.get(url).then((res) => {
-                console.log(res.data);
+            axios.get( invidious + url ).then((res) => {
                 setResults(res.data);
                 if (res.data.length === 0)
                     setTrending(true)
                 else
                     setTrending(false)
+            }).catch(() => {
+                //retrying with alternative invidious instance
+                axios.get( invidious2 + url ).then((res) => {
+                    setResults(res.data);
+                    if (res.data.length === 0)
+                        setTrending(true)
+                    else
+                        setTrending(false)
+                }).catch(() => {
+                    alert('Invidious api is down :(');
+                    return 
+                });
+                return
+                
             });
         }
     }
@@ -59,9 +72,11 @@ export default function Home() {
     }
 
     useEffect(() => {
+        //sending wake up call to probably sleeping heroku youtube-dl backend
         fetch('https://reactube-yandex.herokuapp.com/')
         .then((res) => {
-            console.log('wakeup sent');
+            // console.log('wakeup sent');
+            console.log('.');
         })
     }, []);
 
@@ -131,7 +146,7 @@ export default function Home() {
             }
             </Row>
 
-            <Trending trending={trending} invidious={invidious} />
+            <Trending trending={trending} invidious={invidious} invidious2={invidious2} />
 
         </div>
     );
