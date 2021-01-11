@@ -23,7 +23,7 @@ const VideoPlayer = (props) => {
                 
                 <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column',
                     backgroundColor: bgColor}} >
-                    <ReactPlayer url={videoLink} playing={true} controls={true} pip={true} />
+                    <ReactPlayer url={videoLink} style={{maxWidth: '100%'}} playing={true} controls={true} pip={true} />
                     
                     <DownloadVideo link={videoLink} title={title} stopPlay={handleCancel} />
                     
