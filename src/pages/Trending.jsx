@@ -34,7 +34,7 @@ function Trending(props) {
             getTrending();
         if(trending === false )
             setTrending([]);
-    }, []);
+    });
 
     return(
         <div>
