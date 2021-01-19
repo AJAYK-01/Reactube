@@ -28,28 +28,29 @@ function Trending(props) {
 
         })
     }
+    
 
     useEffect(() => {
+        // the length check condition is for the case when trending is clicked but results not loaded yet.
         if(trending === true && trendingVids.length === 0)
             getTrending();
-        if(trending === false )
-            setTrending([]);
     });
 
     return(
         <div>
             <Row justify='center' >
-                {  trendingVids.length !== 0 ? trendingVids.map( video => {
+                {  trendingVids.length !== 0 && trending === true 
+                    ? trendingVids.map( video => {
                     return(
+                   
                         <ResultCard details={video} />
+                      
                     )
                 }) : [...Array(12)].map( i => {
                     if(trending)
-                        return(
-                            <LoadingCard count={12} />
-                        )
+                        return(<LoadingCard />)
                     else
-                        return(<div/>)
+                        return(<div />)
                 } )
             }
             </Row>
