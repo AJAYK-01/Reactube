@@ -11,8 +11,8 @@ export default function Home() {
 
     const [ results, setResults ] = useState([]);
     const [ trending, setTrending ] = useState(true);
-    const invidious = 'https://invidiou.site';
-    const invidious2 = 'https://invidious.kavin.rocks';
+    const invidious2 = 'https://au.ytprivate.com';
+    const invidious = 'https://invidious.kavin.rocks';
 
     const searchVideos = (searchTerm) => {
         if(searchTerm !== '') {
