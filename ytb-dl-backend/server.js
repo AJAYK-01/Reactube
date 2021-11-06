@@ -13,7 +13,7 @@ const port = process.env.PORT || 4000;
 
 app.use(express.static(publicPath));
 
-// const prcs = exec('pip install --upgrade youtube-dl');
+// const prcs = exec('pip install --upgrade yt-dlp');
 
 app.get('/', (req, res) => {
    res.sendFile(path.join(publicPath, 'index.html'));
@@ -39,7 +39,7 @@ app.get('/download', (req,res) => {
   title = URL.split('/').slice(-1);
 
   if(filter === 'audioonly') {
-    const command = 'youtube-dl -o \''+'./cache/'+title+'.mp3\' -f \'bestaudio[ext=m4a]/mp3\''+' \''+URL+'\'';
+    const command = 'yt-dlp -o \''+'./cache/'+title+'.mp3\' -f \'bestaudio[ext=m4a]/mp3\''+' \''+URL+'\'';
     console.log(command);
     const process = exec(command);
     
@@ -52,7 +52,7 @@ app.get('/download', (req,res) => {
     })
   }
   else {
-    const command = 'youtube-dl -o \''+'./cache/'+title+'.mp4\' -f '+quality+'\'[ext=mp4]+bestaudio[ext=m4a]/mp4\''+' \''+URL+'\'';
+    const command = 'yt-dlp -o \''+'./cache/'+title+'.mp4\' -f '+quality+'\'[ext=mp4]+bestaudio[ext=m4a]/mp4\''+' \''+URL+'\'';
     console.log(command);
     const process = exec(command);
     
